@@ -7,7 +7,7 @@ This package is compatible with ROS Melodic version (Ubuntu 18.04). Existing ver
 ```
 $sudo apt-get install ros-melodic-desktop
 ```
-#Download and Compiling#
+# Download and Compiling #
 ```
 $cd <catkin_ws>/src
 $git clone https://github.com/tahsinkose/sjtu-drone.git
@@ -15,9 +15,9 @@ $cd <catkin_ws>
 $catkin build
 ```
 
-Here <catkin_ws> is the path of the catkin work space. Please refer to the [tutorial](http://wiki.ros.org/ROS/Tutorials) about how to create a catkin work space in ROS.
+Here <catkin_ws> is the path of the catkin workspace. Please refer to the [tutorial](http://wiki.ros.org/ROS/Tutorials) about how to create a catkin workspace in ROS.
 
-#Run
+# Run
 The simplest way is calling after you have built the workspace successfully.
 
 ```
