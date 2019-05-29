@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <scene>
+        <sky>
+            <sunset>20</sunset>
+        </sky>
+    </scene>
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <population name="open_air_jail">
+      <model name="wall">
+        <include>
+          <static>true</static>
+          <uri>model://closed_green_wall</uri>
+        </include>
+      </model>
+      <pose>0 -30 2.25 0 0 0</pose>
+      <distribution>
+        <type>grid</type>
+        <rows>2</rows>
+        <cols>4</cols>
+        <step>15 15 0</step>
+      </distribution>
+    </population>
+    <population name="desperate_masses">
+      <model name="survivor">
+        <include>
+          <static>true</static>
+          <uri>model://person_standing</uri>
+        </include>
+      </model>
+      <pose>0 -30 0 0 0 0</pose>
+      <distribution>
+        <type>grid</type>
+        <rows>2</rows>
+        <cols>4</cols>
+        <step>15 15 0</step>
+      </distribution>
+    </population>
+    <include>
+      <uri>model://sjtu_drone</uri>
+      <pose>0 0 0 0 0 -1.57</pose>
+    </include>
+  </world>
+</sdf>
