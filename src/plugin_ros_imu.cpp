@@ -212,7 +212,7 @@ void GazeboRosIMU::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 void GazeboRosIMU::Reset()
 {
   last_time = world->GetSimTime();
-  orientation = math::Quaternion();
+  orientation = ignition::math::Quaternion();
   velocity = 0.0;
   accel = 0.0;
 
@@ -234,14 +234,14 @@ bool GazeboRosIMU::ServiceCalibrate(std_srvs::Empty::Request &req,
 bool GazeboRosIMU::SetAccelBiasCallback(sjtu_drone::SetBias::Request &req, sjtu_drone::SetBias::Response &res)
 {
   boost::mutex::scoped_lock scoped_lock(lock);
-  accelModel.reset(math::Vector3(req.bias.x, req.bias.y, req.bias.z));
+  accelModel.reset(ignition::math::Vector3(req.bias.x, req.bias.y, req.bias.z));
   return true;
 }
 
 bool GazeboRosIMU::SetRateBiasCallback(sjtu_drone::SetBias::Request &req, sjtu_drone::SetBias::Response &res)
 {
   boost::mutex::scoped_lock scoped_lock(lock);
-  rateModel.reset(math::Vector3(req.bias.x, req.bias.y, req.bias.z));
+  rateModel.reset(ignition::math::Vector3(req.bias.x, req.bias.y, req.bias.z));
   return true;
 }
 
@@ -257,18 +257,18 @@ void GazeboRosIMU::Update()
   boost::mutex::scoped_lock scoped_lock(lock);
 
   // Get Pose/Orientation
-  math::Pose pose = link->GetWorldPose();
+  ignition::math::Pose pose = link->GetWorldPose();
 
   // get Acceleration and Angular Rates
   // the result of GetRelativeLinearAccel() seems to be unreliable (sum of forces added during the current simulation step)?
   //accel = myBody->GetRelativeLinearAccel(); // get acceleration in body frame
-  math::Vector3 temp = link->GetWorldLinearVel(); // get velocity in world frame
+  ignition::math::Vector3 temp = link->GetWorldLinearVel(); // get velocity in world frame
   accel = pose.rot.RotateVectorReverse((temp - velocity) / dt);
   velocity = temp;
 
   // GetRelativeAngularVel() sometimes return nan?
   rate  = link->GetRelativeAngularVel(); // get angular rate in body frame
-//  math::Quaternion delta = pose.rot - orientation;
+//  ignition::math::Quaternion delta = pose.rot - orientation;
 //  orientation = pose.rot;
 //  rate.x = 2.0 * (-orientation.x * delta.w + orientation.w * delta.x + orientation.z * delta.y - orientation.y * delta.z) / dt;
 //  rate.y = 2.0 * (-orientation.y * delta.w - orientation.z * delta.x + orientation.w * delta.y + orientation.x * delta.z) / dt;
@@ -296,10 +296,10 @@ void GazeboRosIMU::Update()
   // apply offset error to orientation (pseudo AHRS) attitude and heading reference system
   double normalization_constant = (gravity_body + accelModel.getCurrentError()).GetLength() * gravity_body.GetLength();
   double cos_alpha = (gravity_body + accelModel.getCurrentError()).Dot(gravity_body)/normalization_constant;
-  math::Vector3 normal_vector(gravity_body.Cross(accelModel.getCurrentError()));
+  ignition::math::Vector3 normal_vector(gravity_body.Cross(accelModel.getCurrentError()));
   normal_vector *= sqrt((1 - cos_alpha)/2)/normalization_constant;
-  math::Quaternion attitudeError(sqrt((1 + cos_alpha)/2), normal_vector.x, normal_vector.y, normal_vector.z);
-  math::Quaternion headingError(cos(headingModel.getCurrentError()/2),0,0,sin(headingModel.getCurrentError()/2));
+  ignition::math::Quaternion attitudeError(sqrt((1 + cos_alpha)/2), normal_vector.x, normal_vector.y, normal_vector.z);
+  ignition::math::Quaternion headingError(cos(headingModel.getCurrentError()/2),0,0,sin(headingModel.getCurrentError()/2));
   pose.rot = attitudeError * pose.rot * headingError;
 
   // copy data into pose message

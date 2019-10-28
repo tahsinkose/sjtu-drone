@@ -138,7 +138,7 @@ double SensorModel_<double>::update(double dt)
 }
 
 template <>
-math::Vector3 SensorModel_<math::Vector3>::update(double dt)
+ignition::math::Vector3 SensorModel_<ignition::math::Vector3>::update(double dt)
 {
   current_error_.x = SensorModelInternalUpdate(current_drift_.x, drift.x, drift_frequency.x, offset.x, gaussian_noise.x, dt);
   current_error_.y = SensorModelInternalUpdate(current_drift_.y, drift.y, drift_frequency.y, offset.y, gaussian_noise.y, dt);
@@ -154,7 +154,7 @@ void SensorModel_<T>::reset(const T& value)
 }
 
 typedef SensorModel_<double> SensorModel;
-typedef SensorModel_<math::Vector3> SensorModel3;
+typedef SensorModel_<ignition::math::Vector3> SensorModel3;
 
 }
 

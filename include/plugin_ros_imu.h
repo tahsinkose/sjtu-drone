@@ -128,7 +128,7 @@ namespace gazebo
       common::Time update_period;
 
       /// \brief save current body/physics state
-      math::Quaternion orientation;
+      ignition::math::Quaternion orientation;
       ignition::math::Vector3d velocity;
       ignition::math::Vector3d accel;
       ignition::math::Vector3d rate;
