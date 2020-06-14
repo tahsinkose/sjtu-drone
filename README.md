@@ -5,14 +5,14 @@ sjtu_drone is a quadrotor simulation program forked from ['tum_simulator'] (http
 # Requirements #
 This package is compatible with ROS Melodic version (Ubuntu 18.04). Existing versions on the internet support at most until Gazebo 7. After Gazebo 8.0, the API has gone significant changes; therefore, it was necessary to adapt the package to Gazebo 8.0+ API. As the default version of Gazebo coming with ROS Melodic is 7.0, it is suggested that do not use the full installation but the desktop installation.
 ```
-$sudo apt-get install ros-melodic-desktop
+$ sudo apt-get install ros-melodic-desktop
 ```
 # Download and Compiling #
 ```
-$cd <catkin_ws>/src
-$git clone https://github.com/tahsinkose/sjtu-drone.git
-$cd <catkin_ws>
-$catkin build
+$ cd <catkin_ws>/src
+$ git clone https://github.com/tahsinkose/sjtu-drone.git
+$ cd <catkin_ws>
+$ catkin build
 ```
 
 Here <catkin_ws> is the path of the catkin workspace. Please refer to the [tutorial](http://wiki.ros.org/ROS/Tutorials) about how to create a catkin workspace in ROS.
@@ -21,11 +21,16 @@ Here <catkin_ws> is the path of the catkin workspace. Please refer to the [tutor
 The simplest way is calling after you have built the workspace successfully.
 
 ```
-$cd <where you check out the code>
-$source devel/setup.bash
-$roslaunch sjtu_drone simple.launch
+$ cd <where you check out the code>
+$ source devel/setup.bash
+$ roslaunch sjtu_drone simple.launch
 ```
+# Running with keyboard
+In second terminal:
 
+```
+$ rosrun sjtu_drone drone_keyboard
+```
 # Adding drone to the simulation world
 In ROS codespace, the robots are generally added to the environment by `spawn_model` node of `gazebo_ros` package via feeding the corresponding URDF file. However, in this case there isn't any URDF file. In future I might add a simple URDf file just trivially produces a base link for the entire robot. However, current method is directly adding to the all `.world` files as follows:
 

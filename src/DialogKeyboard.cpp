@@ -1,4 +1,4 @@
-#include "DialogKeyboard.h"
+#include <DialogKeyboard.h>
 #include <QtWidgets>
 #include "ui_DialogKeyboard.h"
 

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.10)
+cmake_minimum_required(VERSION 3.2.2)
 project(sjtu_drone)
 
 ## Find catkin macros and libraries
@@ -83,7 +83,6 @@ add_library( plugin_ros_imu SHARED
     include/plugin_ros_imu_native.h
 )
 
-add_dependencies(plugin_ros_imu plugin_imu_ros_gencpp)
 
 target_link_libraries( plugin_ros_imu
     ${catkin_LIBRARIES}
@@ -114,6 +113,29 @@ set_target_properties( plugin_ros_cam
     PROPERTIES 
     LIBRARY_OUTPUT_DIRECTORY
     ${PROJECT_SOURCE_DIR}/plugins
+)
+
+################# 5. A program using the keyboard to control the quadrotor #####  
+set(CMAKE_AUTOUIC ON)
+
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+set(QT_LIBRARIES Qt5::Widgets)
+
+qt5_wrap_cpp(QT_MOC include/DialogKeyboard.h)
+qt5_add_resources(RESOURCES include/drone_keyboard.qrc)
+
+
+add_executable( drone_keyboard
+  src/DialogKeyboard.cpp
+  src/drone_object_ros.cpp
+  src/drone_keyboard.cpp
+  ${RESOURCES}
+  ${QT_MOC}
+)
+
+target_link_libraries( drone_keyboard
+  ${QT_LIBRARIES}
+  ${catkin_LIBRARIES}
 )
 
 ################ 6. A simple program for spawning a drone model ###############
