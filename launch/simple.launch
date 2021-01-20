@@ -1,17 +1,13 @@
 <launch>
  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
   <arg name="paused" value="false"/>
-  <arg name="use_sim_time" value="true"/>
-  <arg name="gui" default="false"/>
-  <arg name="headless" value="false"/>
-  <arg name="debug" value="false"/>
-  <arg name="world_name" default="$(find sjtu_drone)/worlds/contest.world"/>
- 
-  
+  <arg name="verbose" value="true"/>
+  <arg name="world_name" default="$(find sjtu_drone)/worlds/search_and_rescue.world"/>
+
   <!-- launch the custom world -->
    <include file="$(find gazebo_ros)/launch/empty_world.launch" >
-        <arg name="paused" value="True"/>
+        <arg name="paused" value="$(arg paused)"/>
         <arg name="world_name" value="$(arg world_name)"/>
-        <arg name="verbose" value="True"/>
+        <arg name="verbose" value="$(arg verbose)"/>
    </include>
 </launch>
