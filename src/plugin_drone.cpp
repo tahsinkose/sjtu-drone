@@ -430,7 +430,7 @@ void DroneSimpleController::UpdateDynamics(double dt){
               double pitch_command =  controllers_.velocity_x.update(cmd_val.angular.x, velocity_xy.X(), velocity_xy.X(), dt) / gravity;
               double roll_command  = -controllers_.velocity_y.update(cmd_val.angular.y, velocity_xy.Y(), velocity_xy.Y(), dt) / gravity;
               torque.X() = inertia.X() *  controllers_.roll.update(roll_command, euler.X(), angular_velocity_body.X(), dt);
-              torque.Y() = inertia.Y() *  controllers_.pitch.update(pitch_command, euler.Y(), angular_velocity_body.Y(), dt);              
+              torque.Y() = inertia.Y() *  controllers_.pitch.update(pitch_command, euler.Y(), angular_velocity_body.Y(), dt);
           }else{
             //control by tilting
             torque.X() = inertia.X() *  controllers_.roll.update(cmd_val.angular.x, euler.X(), angular_velocity_body.X(), dt);
@@ -441,33 +441,20 @@ void DroneSimpleController::UpdateDynamics(double dt){
         force.Z()  = mass      * (controllers_.velocity_z.update(cmd_val.linear.z,  velocity.Z(), acceleration.Z(), dt) + load_factor * gravity);
     }
 
-    
     if (max_force_ > 0.0 && force.Z() > max_force_) force.Z() = max_force_;
     if (force.Z() < 0.0) force.Z() = 0.0;
-    
-    
-  
     // process robot state information
-    if(navi_state == LANDED_MODEL)
-    {
-  
-    }
-    else if(navi_state == FLYING_MODEL)
-    {
+
+    if (navi_state == FLYING_MODEL) {
       link->AddRelativeForce(force);
       link->AddRelativeTorque(torque);
+    } else if (navi_state == TAKINGOFF_MODEL) {
+      link->AddRelativeForce(force * 1.5);
+      link->AddRelativeTorque(torque * 1.5);
+    } else if (navi_state == LANDING_MODEL) {
+      link->AddRelativeForce(force * 0.8);
+      link->AddRelativeTorque(torque * 0.8);
     }
-    else if(navi_state == TAKINGOFF_MODEL)
-    {
-      link->AddRelativeForce(force*1.5);
-      link->AddRelativeTorque(torque*1.5);
-    }
-    else if(navi_state == LANDING_MODEL)
-    {
-      link->AddRelativeForce(force*0.8);
-      link->AddRelativeTorque(torque*0.8);
-    }
-   
 }
 ////////////////////////////////////////////////////////////////////////////////
 // Reset the controller
