@@ -138,21 +138,6 @@ target_link_libraries( drone_keyboard
   ${catkin_LIBRARIES}
 )
 
-################ 6. A simple program for spawning a drone model ###############
-add_executable( spawn_drone
-   src/spawn_drone.cpp
-)
-
-target_link_libraries( spawn_drone
-   ${catkin_LIBRARIES}
-   ${GAZEBO_LIBRARIES}
-   ${Boost_LIBRARIES} ${PROTOBUF_LIBRARIES} pthread
-)
-set_target_properties( spawn_drone
-    PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY
-    ${PROJECT_SOURCE_DIR}/bin
-)
 ################## 7. A sonar sensor plugin for the quadrotor ####################
 add_library( plugin_ros_sonar SHARED
     src/plugin_ros_sonar.cpp
