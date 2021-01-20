@@ -84,9 +84,5 @@
       </link>
       <static>true</static>
     </model>
-    <include>
-      <uri>model://sjtu_drone</uri>
-      <pose>0 0 1 0 0 0</pose>
-    </include>
   </world>
 </sdf>

@@ -44,9 +44,5 @@
         <step>15 15 0</step>
       </distribution>
     </population>
-    <include>
-      <uri>model://sjtu_drone</uri>
-      <pose>0 0 0 0 0 -1.57</pose>
-    </include>
   </world>
 </sdf>
