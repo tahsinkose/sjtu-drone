@@ -61,28 +61,12 @@
       <direction>0.000000 0.000000 -1.000000</direction>
       <cast_shadows>false</cast_shadows>
     </light>
-    <model name="garching_kitchen">
-      <link name="garching_kitchen_link">
-        <pose>0 0 0 0 0 0</pose>
-        <collision name="garching_kitchen_collision">
-          <geometry>
-            <mesh>
-              <uri>file://meshes/garching_kitchen.dae</uri>
-              <scale>2 2 2</scale>
-            </mesh>
-          </geometry>
-        </collision>
-        <visual name="garching_kitchen">
-          <geometry>
-            <mesh>
-              <uri>file://meshes/garching_kitchen.dae</uri>
-              <scale>2 2 2</scale>
-            </mesh>
-          </geometry>
-          <cast_shadows>false</cast_shadows>
-        </visual>
-      </link>
-      <static>true</static>
-    </model>
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://garching_kitchen</uri>
+    </include>
   </world>
 </sdf>

@@ -93,28 +93,8 @@
       </link>
       <static>true</static>
     </model>
-    <model name="fly_indoor">
-      <link name="fly_indoor_link">
-        <pose>0 0 0 0 0 0</pose>
-        <collision name="fly_indoor_collision">
-          <geometry>
-            <mesh>
-              <uri>file://meshes/for_contest_part1.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-        </collision>
-        <visual name="fly_indoor_visual">
-          <geometry>
-            <mesh>
-              <uri>file://meshes/for_contest_part1.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <cast_shadows>false</cast_shadows>
-        </visual>
-      </link>
-      <static>true</static>
-    </model>
+    <include>
+      <uri>model://fly_indoor</uri>
+    </include>
   </world>
 </sdf>
