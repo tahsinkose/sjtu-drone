@@ -38,8 +38,8 @@ public:
     bool takeOff();
     bool land();
     bool hover();
-    bool posCtrl(bool on);
-    bool velMode(bool on);
+    void posCtrl(bool on);
+    void velMode(bool on);
     
     // commands for controling ARDrone
     // pitch_lr = left-right tilt		(-1) to right		(+1)

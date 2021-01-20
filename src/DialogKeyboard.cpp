@@ -50,45 +50,26 @@ void DialogKeyboard::keyPressEvent(QKeyEvent *event){
         break;
     case 'A':
         //tilt left
-        if( !drone->isVelMode)
-            drone->roll(-0.1f);
-        else
-            drone->pitch(0.7f);
-        
+        drone->roll(0.7f);
         break;
     case 'D':
-        //tilt right
-        if( !drone->isVelMode)
-            drone->roll(0.1f);
-        else
-            drone->pitch(-0.7f);
+        //tilt left
+        drone->roll(-0.7f);
         break;
     case 'W':
         //title front
-        if( !drone->isVelMode)
-            drone->pitch(0.1f);
-        else
-            drone->roll(0.7f);
+        drone->pitch(0.7f);
         break;
     case 'S':
-        if( !drone->isVelMode)
-            drone->pitch(-0.1f);
-        else
-            drone->roll(-0.7f);
+        // title back
+        drone->pitch(-0.7f);
         break;
-   
-    case 'M':
-        drone->velMode(!drone->isVelMode);
-        break;
-        
     case 'T':
         testPositionControl();
         break;
-       
+
     default:
-        //break;
-        if(!drone->isPosctrl)
-            drone->hover();
+        drone->hover();
     }
     event->accept();
 }
@@ -114,16 +95,7 @@ void DialogKeyboard::testPositionControl(){
     }
     else{
         drone->posCtrl(true);
-        std::cout << "(0.5,-1.5,6)" << std::endl;
-        drone->moveTo(0.5,-1.5,2);
-        sleep(5);
-        drone->moveTo(0.5,1.5,2);
-        sleep(5);
-        drone->moveTo(-3,1.5,2);
-        sleep(5);
-        drone->moveTo(-3,-1.5,2);
-        sleep(5);
-        drone->moveTo(0.5,-1.5,2);
-        sleep(5);
+        std::cout << "Flying to (4.5,-4.5, 6) with position control." << std::endl;
+        drone->moveTo(4.5,-4.5,6);
     }
-}    
+}
