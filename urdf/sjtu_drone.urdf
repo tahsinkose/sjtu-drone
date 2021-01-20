@@ -9,13 +9,13 @@
     <collision name="sjtu_drone__collision">
       <origin rpy="0 0 0" xyz="0   0   0.04"/>
       <geometry>
-        <mesh filename="package://meshes/quadrotor_4.stl"/>
+        <mesh filename="package://sjtu_drone/meshes/quadrotor_4.stl"/>
       </geometry>
     </collision>
     <visual name="sjtu_drone__visual">
       <origin rpy="0 0 0" xyz="0   0   0.04"/>
       <geometry>
-        <mesh filename="package://meshes/quadrotor_4.dae"/>
+        <mesh filename="package://sjtu_drone/meshes/quadrotor_4.dae"/>
       </geometry>
     </visual>
   </link>
