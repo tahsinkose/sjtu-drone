@@ -1,7 +1,7 @@
-#include "ui_DialogKeyboard.h"
 #include <DialogKeyboard.h>
 #include <QtWidgets>
 
+#include "ui_DialogKeyboard.h"
 DialogKeyboard::DialogKeyboard(QWidget *parent)
     : QDialog(parent), ui(new Ui::DialogKeyboard) {
   ui->setupUi(this);
