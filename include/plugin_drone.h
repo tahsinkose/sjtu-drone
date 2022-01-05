@@ -4,7 +4,7 @@
 #include "gazebo/gazebo.hh"
 #include "gazebo/physics/physics.hh"
 #include "gazebo/common/Events.hh"
-#include "ignition/math4/ignition/math.hh"
+#include "ignition/math6/ignition/math.hh"
 #include <ros/callback_queue.h>
 #include <ros/ros.h>
 
